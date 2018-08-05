@@ -1,0 +1,35 @@
+{
+  "name": "minesweeper",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-watch index.js",
+    "build": "babel index.js -d build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-unit": "NODE_ENV=test mocha './**/*.spec.js' --watch --require babel-register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/irvin93d/minesweeper.git"
+  },
+  "keywords": [],
+  "author": "Duane Irvin",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/irvin93d/minesweeper/issues"
+  },
+  "homepage": "https://github.com/irvin93d/minesweeper",
+  "dependencies": {
+    "babel-preset-latest": "^6.24.1",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "babel-watch": "^2.0.7",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.2.0"
+  }
+}
