@@ -7,9 +7,14 @@ describe('minesweeper game', () => {
     it.skip('should generate correct size', () => {
     });
     it.skip('should have correct number of mines', () => {
+
     });
+
     it.skip('should all be closed', () => {
+
     });
+
+
     it.skip('should open correct cell', () => {
     });
     it.skip('should open recursively if empty', () => {
