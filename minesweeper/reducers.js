@@ -8,6 +8,11 @@ const initialState = {
     rows: 0,
 }
 
+const initialMineState = {
+    open: false,
+    mine: false
+}
+
 export default (state = initialState, action) => {
     switch (action.type) {
         case actions.NEW_GAME:
@@ -26,10 +31,7 @@ const newGame = (payload) => {
 
 const emptyGame = (payload) => {
     const minefield = new Array(payload.rows).fill(
-        new Array(payload.cols).fill({
-            open: false,
-            mine: false
-        })
+        new Array(payload.cols).fill({...initialMineState})
     );
     const state = {
         cols: payload.cols,
@@ -49,17 +51,17 @@ const setMines = (state, payload) => {
 
 const setMine = (state, row, col) => {
     const mf = state.minefield;
-    const rtn = Object.assign({}, state, {
+    const rtn = {...state, 
         minefield: [
             ...mf.slice(0,row),
                 [
                     ...mf[row].slice(0,col),
-                    Object.assign({}, mf[row][col], {mine:true}),
+                    {...mf[row][col], mine:true},
                     ...mf[row].slice(col+1)
                 ],
             ...mf.slice(row+1)
         ]
-    });
+    };
     return rtn;
 }
 

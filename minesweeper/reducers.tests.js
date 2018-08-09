@@ -24,18 +24,25 @@ describe('minesweeper reducers', () => {
 
         it('should create the correct size', () => {
             minefield.should.have.lengthOf(rows);
-            forAllRows(state, (row) => row.should.have.lengthOf(cols));
+            minefield.forEach((row) => row.should.have.lengthOf(cols));
             state.should.have.property('rows', rows);
             state.should.have.property('cols', cols);
         });
 
         it('should have all closed', () => {
-            forAllCells(state, (cell) => cell.should.have.property('open', false));
+            minefield.reduce((a, b) => a.concat(b), [])
+                .forEach((cell) => cell.should.have.property('open', false));
+        });
+
+        it('should have correct number of cells', () => {
+            let count = 0;
+            minefield.reduce((a, b) => a.concat(b), []).forEach(() => count++);
+            count.should.equal(rows * cols);
         });
 
         it('should have correct number of mines', () => {
             let count = 0;
-            forAllCells(state, (cell) => {
+            minefield.reduce((a, b) => a.concat(b), []).forEach((cell) => {
                 cell.mine.should.be.an('boolean')
                 count += cell.mine;
             });
@@ -44,12 +51,3 @@ describe('minesweeper reducers', () => {
     });
 });
 
-const forAllRows = (state, f) => {
-    for (let r = 0; r < state.rows; r++) { f(state.minefield[r]) }
-}
-
-const forAllCells = (state, f) => {
-    forAllRows(state, (row) => {
-        for (let c = 0; c < state.cols; c++) { f(row[c]) }
-    });
-}
